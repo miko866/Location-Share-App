@@ -1,0 +1,20 @@
+/*
+* Login Component
+*/
+
+.custom-card-login .card {
+  height: 16em;
+}
+
+.custom-card-login .card-body {
+  display: flex;
+  align-items: center;
+}
+
+.custom-card-login form {
+  width: 100%;
+}
+
+.custom-card-login .btn-link:hover {
+  text-decoration: none;
+}

@@ -1,0 +1,29 @@
+/*
+* Location Card
+*/
+
+.location-card {
+  display: block;
+  padding-top: 2em;
+}
+
+.card {
+  width: 40em;
+  margin: 0 auto;
+  margin-bottom: 2em;
+}
+
+.location-card__author a {
+  color: #3776cb;
+}
+
+.location-card__author a:hover {
+  text-decoration: none;
+  color: #e8ba21;
+  transition: 0.2s all ease-in;
+}
+
+.location-card .btn-outline-danger:hover,
+.location-card .btn-outline-primary:hover {
+  color: white !important;
+}

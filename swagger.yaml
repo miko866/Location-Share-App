@@ -1,0 +1,262 @@
+swagger: '2.0'
+info:
+  description: 'This is a Location Blog API. App is based on Java Spring Boot Hibernate with H2 als server and React JS with Bootstrap als clinet.'
+  version: '1.0.0'
+  title: 'Swagger Location API'
+  contact:
+    email: 'mdurik2@gmail.com'
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+basePath: '/api'
+tags:
+  - name: 'posts'
+    description: 'Everything about locations'
+  - name: 'users'
+    description: 'All from user'
+schemes:
+  - 'http'
+paths:
+  /posts:
+    post:
+      tags:
+        - 'posts'
+      summary: 'Create new post'
+      description: 'Create new Post'
+      operationId: 'createNewPost'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'Post object that needs to be added to the store'
+          required: true
+          schema:
+            $ref: '#/definitions/Posts'
+      responses:
+        405:
+          description: 'Invalid input'
+  /posts/{id}:
+    get:
+      tags:
+        - 'posts'
+      summary: 'Get one location post'
+      description: ''
+      operationId: 'updateLocation'
+      consumes:
+        - 'application/json'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'id'
+          in: 'path'
+          description: ''
+          required: true
+          type: 'integer'
+      responses:
+        400:
+          description: 'Invalid ID supplied'
+        404:
+          description: 'Location not found'
+        405:
+          description: 'Validation exception'
+    delete:
+      tags:
+        - 'posts'
+      summary: 'Delete post'
+      description: 'This can only be done by the logged in user.'
+      operationId: 'deletePost'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'id'
+          in: 'path'
+          description: 'The id that needs to be deleted'
+          required: true
+          type: 'integer'
+      responses:
+        400:
+          description: 'Invalid operation supplied'
+        404:
+          description: 'Post not found'
+  /posts/title/{postTitle}:
+    get:
+      tags:
+        - 'posts'
+      summary: 'Finds Posts by post title'
+      description: ''
+      operationId: 'findPostByTitle'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'postTitle'
+          in: 'path'
+          description: 'Title from location post'
+          required: true
+          type: 'string'
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid status value'
+  /posts/allPostByAuthor:
+    get:
+      tags:
+        - 'posts'
+      summary: 'Finds all post by author'
+      description: ''
+      operationId: 'allPostByAuthor'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid status value'
+  /posts/allPost:
+    get:
+      tags:
+        - 'posts'
+      summary: 'Finds all post from all authors'
+      description: ''
+      operationId: 'allPost'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid status value'
+  /users/register:
+    post:
+      tags:
+        - 'users'
+      summary: 'Create user'
+      description: 'Everyone can create one or more user'
+      operationId: 'createUser'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'Created user object'
+          required: true
+          schema:
+            $ref: '#/definitions/UserRegister'
+      responses:
+        default:
+          description: 'successful operation'
+  /users/login:
+    post:
+      tags:
+        - 'users'
+      summary: 'Logs user into the system'
+      description: ''
+      operationId: 'loginUser'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'username'
+          in: 'query'
+          description: 'The user name for login muss an email'
+          required: true
+          type: 'string'
+        - name: 'password'
+          in: 'query'
+          description: 'The password for login in clear text'
+          required: true
+          type: 'string'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/UserLogin'
+          headers:
+            JWT Token:
+              type: 'string'
+              format: 'string'
+              description: 'Generate uniq token for every user with data'
+            X-Expires-After:
+              type: 'string'
+              format: 'date-time'
+              description: 'Date in UTC when token expires'
+        400:
+          description: 'Invalid username/password supplied'
+  /users/allUsers:
+    get:
+      tags:
+        - 'users'
+      summary: 'Get all users'
+      description: ''
+      operationId: 'getAllUsers'
+      produces:
+        - 'application/json'
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid username supplied'
+        404:
+          description: 'Users not found'
+  /users/{id}:
+    get:
+      tags:
+        - 'users'
+      summary: 'Get user by id'
+      description: ''
+      operationId: 'getUserById'
+      produces:
+        - 'application/json'
+      parameters:
+        - name: 'id'
+          in: 'path'
+          description: ''
+          required: true
+          type: 'integer'
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid username supplied'
+        404:
+          description: 'Users not found'
+definitions:
+  Posts:
+    type: 'object'
+    properties:
+      title:
+        type: 'string'
+      street:
+        type: 'string'
+      streetNumber:
+        type: 'string'
+      zip:
+        type: 'string'
+      city:
+        type: 'string'
+      text:
+        type: 'string'
+      image:
+        type: 'string'
+  UserRegister:
+    type: 'object'
+    properties:
+      firstName:
+        type: 'string'
+      lastName:
+        type: 'string'
+      username:
+        type: 'string'
+      password:
+        type: 'string'
+      confirmPassword:
+        type: 'string'
+  UserLogin:
+    type: 'object'
+    properties:
+      username:
+        type: 'string'
+      password:
+        type: 'string'

@@ -1,0 +1,18 @@
+/*
+* MapBox
+*/
+
+.map-box {
+  display: flex;
+  justify-content: center;
+}
+
+.button-position {
+  display: flex;
+  justify-content: center;
+}
+
+.button-position a:hover {
+  color: white;
+  text-decoration: none;
+}

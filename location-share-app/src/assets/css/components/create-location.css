@@ -1,0 +1,45 @@
+/*
+* Create Location
+*/
+
+.image-upload {
+  display: flex;
+  flex-direction: row;
+}
+
+.file {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.file input {
+  position: absolute;
+  font-size: 50px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.delete-icon {
+  display: flex;
+  align-items: center;
+  height: 2.5em;
+}
+.delete-icon p {
+  margin: unset;
+  width: 10em;
+}
+.delete-icon i {
+  cursor: pointer;
+}
+
+.imgPreview {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.imgPreview img {
+  width: 15em;
+  border-radius: 5px;
+}

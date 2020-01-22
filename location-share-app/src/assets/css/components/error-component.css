@@ -1,0 +1,11 @@
+/*
+* Error Component
+*/
+
+.error-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 30em;
+  align-items: center;
+}
