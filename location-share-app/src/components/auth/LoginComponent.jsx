@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { login } from '../actions/securityActions';
+import { login } from '../../actions/securityActions';
 
 // Custom CSS
-import '../assets/css/components/login-component.css';
+import '../../assets/css/components/login-component.css';
 
 class LoginComponent extends Component {
   constructor(props) {

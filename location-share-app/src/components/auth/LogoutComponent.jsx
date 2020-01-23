@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Custom CSS
-import '../assets/css/components/logout-component.css';
+import '../../assets/css/components/logout-component.css';
 
 export default class LogoutComponent extends Component {
   constructor(props) {

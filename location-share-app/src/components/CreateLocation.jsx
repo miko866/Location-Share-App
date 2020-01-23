@@ -88,7 +88,7 @@ class CreateLocation extends Component {
       title: this.state.title,
       street: this.state.street,
       streetNumber: this.state.streetNumber,
-      zip: this.state.zip,
+      zip: this.state.zip.toString(),
       city: this.state.city,
       text: this.state.text,
     };
@@ -162,7 +162,7 @@ class CreateLocation extends Component {
                 {/* START Zip */}
                 <div className="form-group pt-2 pb-2">
                   <input
-                    type="text"
+                    type="number"
                     name="zip"
                     className={classnames('form-control', { 'is-invalid': errors.zip })}
                     placeholder="Zip"

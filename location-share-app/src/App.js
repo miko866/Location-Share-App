@@ -3,17 +3,18 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 
-// Import Custom Components
+// Auth Components
+import Login from './components/auth/LoginComponent';
+import Logout from './components/auth/LogoutComponent';
+import Singin from './components/auth/SinginComponent';
+import ForgetPassword from './components/auth/ForgetPassword';
+
 import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
 import UsersCard from './components/UsersCard';
-import Login from './components/LoginComponent';
-import Logout from './components/LogoutComponent';
-import Singin from './components/SinginComponent';
 import CreateLocation from './components/CreateLocation';
 import UserProfile from './components/UserProfile';
 import MapLocation from './components/MapLocation';
-import ForgetPassword from './components/ForgetPassword';
 import EditLocation from './components/EditLocation';
 import LocationCardUserPosts from './components/LocationCardUserPosts';
 

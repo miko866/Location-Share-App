@@ -24,6 +24,10 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment)for more information.
 
+## Swageer 
+
+Complete description about REST API is in swagger file. 
+
 ## Copyright
 
 &copy; mdurik2@gmail.com
