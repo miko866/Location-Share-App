@@ -3,7 +3,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import setJWTToken from '../securityUtils/setJWTToken';
 import jwtDecode from 'jwt-decode';
 
-//* Create new user in SinginComponent
+// Create new user in SinginComponent
 export const createNewUser = (newUser, history) => async (dispatch) => {
   try {
     // Connect to Server
@@ -24,7 +24,7 @@ export const createNewUser = (newUser, history) => async (dispatch) => {
   }
 };
 
-//*  Login in LoginComponent
+//  Login in LoginComponent
 export const login = (LoginRequest) => async (dispatch) => {
   try {
     // Connect toserver
@@ -53,7 +53,7 @@ export const login = (LoginRequest) => async (dispatch) => {
   }
 };
 
-//* Logout in Navbar
+// Logout in Navbar
 export const logout = () => (dispatch) => {
   // Remove Token from sessionStorage
   sessionStorage.removeItem('jwtToken');

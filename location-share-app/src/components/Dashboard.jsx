@@ -58,6 +58,8 @@ class Dashboard extends Component {
     // Save data from Server
     const { posts } = this.props.post;
 
+    console.log('POST', posts);
+
     // Create Token
     const token = sessionStorage.getItem('jwtToken');
     let tokenId = 0;
@@ -81,11 +83,11 @@ class Dashboard extends Component {
           {/* Render Cards from bully data */}
           {posts.map((item) => (
             <div className="card" key={item.id}>
-              {/* <img
-                src={require(`../assets/img/${item.image}`)}
+              <img
+                src={'http://localhost:8080/images/' + item.image}
                 className="card-img-top"
                 alt={item.title}
-              /> */}
+              />
               <div className="card-body">
                 <h2 className="card-title">{item.title}</h2>
                 <h5>

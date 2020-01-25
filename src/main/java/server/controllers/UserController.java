@@ -27,8 +27,6 @@ import static server.security.SecurityConstants.TOKEN_PREFIX;
 @RequestMapping("/api/users")
 public class UserController {
 
-	private static String UPLOADED_FOLDER = "\\Users\\michalevo\\Desktop\\My_Code\\Java\\location-share-app\\src\\main\\java\\server\\images\\";
-
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
 

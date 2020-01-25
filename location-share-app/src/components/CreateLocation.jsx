@@ -50,12 +50,6 @@ class CreateLocation extends Component {
     this.setState({ imagePreviewUrl: '', imageName: '', image: '' });
   }
 
-  // Send on Server
-  _handleSubmit(event) {
-    event.preventDefault();
-    // console.log('handle submit - ', this.state.image);
-  }
-
   // Load image
   _handleImageChange(event) {
     event.preventDefault();
@@ -75,7 +69,6 @@ class CreateLocation extends Component {
         imagePreviewUrl: reader.result,
       });
     };
-
     reader.readAsDataURL(file);
   }
 
@@ -83,18 +76,26 @@ class CreateLocation extends Component {
   createLocation(event) {
     event.preventDefault();
 
-    // Create payload for Server
-    const newLocation = {
-      title: this.state.title,
-      street: this.state.street,
-      streetNumber: this.state.streetNumber,
-      zip: this.state.zip.toString(),
-      city: this.state.city,
-      text: this.state.text,
-    };
+    // firstName: "First name is required"
+    // lastName: "Last name is required"
+    // password: "Password must beat leas
 
-    // Send payload
-    this.props.createPost(newLocation, this.props.history);
+    if (this.state.title === '') {
+      this.setState({ errors: { title: 'Title is required' } });
+    }
+
+    // Create payload for Server
+    // let formData = new FormData();
+    // formData.append('title', this.state.title);
+    // formData.append('street', this.state.street);
+    // formData.append('streetNumber', this.state.streetNumber);
+    // formData.append('zip', this.state.zip);
+    // formData.append('city', this.state.city);
+    // formData.append('text', this.state.text);
+    // formData.append('file', this.state.image, this.state.image.name);
+
+    // // Send payload
+    // this.props.createPost(formData, this.props.history);
   }
 
   render() {
@@ -200,7 +201,7 @@ class CreateLocation extends Component {
 
                 {/* START Image upload */}
                 <div className="image-upload  pt-3 pb-5">
-                  <div onSubmit={(e) => this._handleSubmit(e)} className="pr-5">
+                  <div className="pr-5">
                     <div className="file btn  btn-outline-primary">
                       Upload
                       <input

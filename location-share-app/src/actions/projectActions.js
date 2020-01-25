@@ -9,11 +9,11 @@ import {
   GET_USER,
 } from './types';
 
-//* Create new post in CreateLocation component
+//  Create new post in CreateLocation component
 export const createPost = (project, history) => async (dispatch) => {
   try {
     // Connection to Server
-    await axios.post('/api/posts', project);
+    await axios.post('/api/posts', project, { headers: { 'content-type': 'multipart/form-data' } });
     history.push('/');
   } catch (error) {
     // Save errors into redux
@@ -35,7 +35,7 @@ export const getPosts = () => async (dispatch) => {
   });
 };
 
-//* Show all users in UsersCard component
+// Show all users in UsersCard component
 export const getUsers = () => async (dispatch) => {
   // Connection to Server
   const res = await axios.get('/api/users/allUsers');
@@ -56,7 +56,7 @@ export const getUser = (id) => async (dispatch) => {
   });
 };
 
-//* Show all posts by author in LocationCardUserPosts component
+// Show all posts by author in LocationCardUserPosts component
 export const getPostsByAuthor = () => async (dispatch) => {
   // Connection to Server
   const res = await axios.get(`/api/posts/allPostsByAuthor`);
@@ -67,7 +67,7 @@ export const getPostsByAuthor = () => async (dispatch) => {
   });
 };
 
-//* Show post in EditLocation component
+// Show post in EditLocation component
 export const getPost = (id) => async (dispatch) => {
   // Connection to Server
   const res = await axios.get(`/api/posts/${id}`);

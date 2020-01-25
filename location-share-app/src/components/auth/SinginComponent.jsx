@@ -47,12 +47,6 @@ class SinginComponent extends Component {
     this.setState({ imagePreviewUrl: '', imageName: '', file: '' });
   }
 
-  // Send on Server
-  _handleSubmit(event) {
-    event.preventDefault();
-    // console.log('handle submit - ', this.state.file);
-  }
-
   // Load image
   _handleImageChange(event) {
     event.preventDefault();
@@ -93,6 +87,9 @@ class SinginComponent extends Component {
 
   render() {
     const { errors } = this.state;
+
+    console.log('Errors', errors);
+
     // Set image preview from state
     let { imagePreviewUrl } = this.state;
     let $imagePreview = null;
@@ -184,12 +181,12 @@ class SinginComponent extends Component {
 
                 {/* START Image upload */}
                 <div className="image-upload  pt-3 pb-5">
-                  <form onSubmit={(e) => this._handleSubmit(e)} className="pr-5">
+                  <div className="pr-5">
                     <div className="file btn  btn-outline-primary">
                       Upload
                       <input type="file" name="file" onChange={(e) => this._handleImageChange(e)} />
                     </div>
-                  </form>
+                  </div>
 
                   {/* START Delete icon */}
                   <div className="delete-icon">
