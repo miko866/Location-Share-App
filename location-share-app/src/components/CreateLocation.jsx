@@ -81,26 +81,59 @@ class CreateLocation extends Component {
     // password: "Password must beat leas
 
     if (this.state.title === '') {
-      this.setState({ errors: { title: 'Title is required' } });
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          title: 'Title is required',
+        },
+      });
+    }
+    if (this.state.street === '') {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          street: 'Street is required',
+        },
+      });
+    }
+    if (this.state.zip === '') {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          zip: 'Zip is required',
+        },
+      });
+    }
+    if (this.state.zip.length < 4) {
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          zip: 'Zip can containt only 4 ditigs',
+        },
+      });
     }
 
-    // Create payload for Server
-    // let formData = new FormData();
-    // formData.append('title', this.state.title);
-    // formData.append('street', this.state.street);
-    // formData.append('streetNumber', this.state.streetNumber);
-    // formData.append('zip', this.state.zip);
-    // formData.append('city', this.state.city);
-    // formData.append('text', this.state.text);
-    // formData.append('file', this.state.image, this.state.image.name);
+    if (this.state.errors === '') {
+      //	Create payload for Server
+      let formData = new FormData();
+      formData.append('title', this.state.title);
+      formData.append('street', this.state.street);
+      formData.append('streetNumber', this.state.streetNumber);
+      formData.append('zip', this.state.zip);
+      formData.append('city', this.state.city);
+      formData.append('text', this.state.text);
+      formData.append('file', this.state.image, this.state.image.name);
 
-    // // Send payload
-    // this.props.createPost(formData, this.props.history);
+      // Send payload
+      this.props.createPost(formData, this.props.history);
+    }
   }
 
   render() {
     // Check errors
     const { errors } = this.state;
+
+    console.log('Errors', errors);
 
     // Set image preview from state
     let { imagePreviewUrl } = this.state;
