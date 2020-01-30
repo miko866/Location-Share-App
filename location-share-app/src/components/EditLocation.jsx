@@ -28,9 +28,9 @@ class EditLocation extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  // Check props for that post from DB per Redux
+  // Life cycle hooks
   componentWillReceiveProps(nextProps) {
-    const { id, title, street, streetNumber, zip, city, text } = nextProps.post;
+    const { id, title, street, streetNumber, zip, city, text, image } = nextProps.post;
 
     this.setState({
       id,
@@ -40,6 +40,7 @@ class EditLocation extends Component {
       zip,
       city,
       text,
+      image,
     });
 
     if (nextProps.errors) {
@@ -67,18 +68,23 @@ class EditLocation extends Component {
     event.preventDefault();
 
     // Create payload for Server
-    const editPost = {
-      id: this.state.id,
-      title: this.state.title,
-      street: this.state.street,
-      streetNumber: this.state.streetNumber,
-      zip: this.state.zip,
-      city: this.state.city,
-      text: this.state.text,
-    };
+    let formData = new FormData();
+    formData.append('id', this.state.id);
+    formData.append('title', this.state.title);
+    formData.append('street', this.state.street);
+    formData.append('streetNumber', this.state.streetNumber);
+    formData.append('zip', this.state.zip);
+    formData.append('city', this.state.city);
+    formData.append('text', this.state.text);
+
+    if (this.state.image.name === undefined) {
+      formData.append('image', this.state.image);
+    } else {
+      formData.append('file', this.state.image, this.state.image.name);
+    }
 
     // Send payload
-    this.props.createPost(editPost, this.props.history);
+    this.props.createPost(formData, this.props.history);
   }
 
   // Delete image
@@ -121,10 +127,17 @@ class EditLocation extends Component {
 
     // Set image preview from state
     let { imagePreviewUrl } = this.state;
+
+    console.log('Image froim server', this.state.image);
+
     let $imagePreview = null;
     // Create HTML img element with loaded image and show preview if exist
-    if (imagePreviewUrl) {
-      $imagePreview = <img src={imagePreviewUrl} alt={this.state.imageName} />;
+    if (this.state.image && this.state.imagePreviewUrl === '') {
+      $imagePreview = (
+        <img src={'http://localhost:8080/images/' + this.state.image} alt={this.state.imageName} />
+      );
+    } else if (this.state.imagePreviewUrl) {
+      $imagePreview = <img src={this.state.imagePreviewUrl} alt={this.state.imageName} />;
     } else {
       $imagePreview = <div className="previewText"></div>;
     }

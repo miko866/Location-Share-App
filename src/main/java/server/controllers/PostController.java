@@ -44,34 +44,35 @@ public class PostController {
 //	}
 
 	@PostMapping("")
-	public ResponseEntity<?>  createNewPost(@RequestParam String title, @RequestParam String street, @RequestParam String streetNumber, @RequestParam String zip, @RequestParam String city, @RequestParam String text, @RequestParam("file") MultipartFile file, Principal principal) {
-		Date date = new Date();
-		long timeMilli = date.getTime();
-		String filename = timeMilli + "_" + file.getOriginalFilename();
-
+	public ResponseEntity<?>  createNewPost(@RequestParam(value = "id", required = false) Long id, @RequestParam String title, @RequestParam String street, @RequestParam String streetNumber, @RequestParam String zip, @RequestParam String city, @RequestParam String text, @RequestParam(value = "image", required = false) String image, @RequestParam(value = "file", required = false) MultipartFile file, Principal principal) {
 		Post post = new Post();
+
+		post.setId(id);
 		post.setTitle(title);
 		post.setStreet(street);
 		post.setStreetNumber(streetNumber);
 		post.setZip(zip);
 		post.setCity(city);
 		post.setText(text);
-		post.setImage(filename);
 
-		// Check custom errors, but with the image don't working
-//		ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-//		if (errorMap != null) return errorMap;
+		Date date = new Date();
+		long timeMilli = date.getTime();
+		String filename;
 
-		try {
-			byte[] bytes = file.getBytes();
-			Path path = Paths.get(UPLOADED_FOLDER + filename);
-			Files.write(path, bytes);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(file != null ) {
+			filename = timeMilli + "_" + file.getOriginalFilename();
+			post.setImage(filename);
+
+			try {
+				byte[] bytes = file.getBytes();
+				Path path = Paths.get(UPLOADED_FOLDER + filename);
+				Files.write(path, bytes);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			post.setImage(image);
 		}
-
-
-
 
 		Post post1 = postService.saveAndUpdatePost(post, principal.getName());
 		return new ResponseEntity<Post>(post1, HttpStatus.CREATED);

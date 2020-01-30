@@ -76,10 +76,6 @@ class CreateLocation extends Component {
   createLocation(event) {
     event.preventDefault();
 
-    // firstName: "First name is required"
-    // lastName: "Last name is required"
-    // password: "Password must beat leas
-
     if (this.state.title === '') {
       this.setState({
         errors: {
@@ -113,7 +109,7 @@ class CreateLocation extends Component {
       });
     }
 
-    if (this.state.errors === '') {
+    if (this.state.street !== '') {
       //	Create payload for Server
       let formData = new FormData();
       formData.append('title', this.state.title);

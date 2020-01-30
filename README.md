@@ -1,7 +1,8 @@
 # Location Share App
 
 ## Created in Java Spring Boot with H2 and with React Js
-
+### H2
+### `http://localhost:8080/h2/`
 ## Available Scripts for Client Start and Build
 
 In the location-share-app directory, you can run:
